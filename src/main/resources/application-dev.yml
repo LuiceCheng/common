@@ -1,0 +1,21 @@
+spring:
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
+    username: root
+    password: 123abc
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    driver-class-name: com.mysql.jdbc.Driver
+  mvc:
+    view:
+      prefix: /
+      suffix: .html
+
+server:
+  port: 8081
+  servlet:
+    context-path: /cxs
+
+mybatis:
+  mapper-locations: classpath*:mybatis/**/*.xml

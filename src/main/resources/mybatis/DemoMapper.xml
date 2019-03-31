@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.common.dao.DemoMapper">
+    <resultMap id="BaseResultMap" type="com.example.common.model.Demo">
+        <result column="id" property="id"/>
+        <result column="age" property="age"/>
+        <result column="name" property="name"/>
+        <result column="create_at" property="createAt" />
+        <result column="create_by" property="createBy" />
+        <result column="update_at" property="updateAt" />
+        <result column="update_by" property="updateBy" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        id,age,name,create_at,create_by,update_at,update_by
+    </sql>
+    <sql id="Example_Where_clause">
+        <where>
+            <if test="example.id != null">
+                and id = #{example.id, jdbcType=VARCHAR}
+            </if>
+
+            <if test="example.age != null">
+                and age = #{example.age, jdbcType=VARCHAR}
+            </if>
+
+            <if test="example.name != null">
+                and name like concat("%",#{example.name, jdbcType=VARCHAR},"%")
+            </if>
+        </where>
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap">
+        select <if test="distinct"> distinct </if>
+        <include refid="Base_Column_List" />
+        from user
+        <include refid="Example_Where_clause" />
+    </select>
+</mapper>
