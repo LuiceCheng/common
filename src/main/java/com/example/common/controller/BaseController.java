@@ -1,7 +1,10 @@
 package com.example.common.controller;
 
+import com.example.common.config.redis.RedisRepository;
 import com.example.common.model.Demo;
 import com.example.common.services.IDemoService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +21,12 @@ import java.util.Map;
 @RequestMapping("/base")
 public class BaseController {
 
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private IDemoService demoService;
+
+    @Autowired
+    private RedisRepository redisRepository;
 
     @RequestMapping("/index")
     public String base(HttpServletRequest request){
@@ -28,10 +35,13 @@ public class BaseController {
 
     @RequestMapping("/success")
     public String success(Map<String,Object> map){
+        logger.info("wolaila");
         map.put("hello","<h2>nihao</h2>");
         Demo demo = new Demo();
         demo.setName("zhangsan");
         demoService.selectByExample(demo);
+        redisRepository.set("abc","张三");
+        String abc = redisRepository.get("abc");
         return "succes";
     }
 }

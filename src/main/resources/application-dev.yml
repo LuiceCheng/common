@@ -5,8 +5,6 @@ spring:
     url: jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
     username: root
     password: 123abc
-#    type: com.alibaba.druid.pool.DruidDataSource
-#    driver-class-name: com.mysql.jdbc.Driver
   mvc:
     view:
       prefix: /
@@ -17,5 +15,8 @@ server:
   servlet:
     context-path: /cxs
 
-mybatis:
+mybatis-plus:
   mapper-locations: classpath*:mybatis/**/*.xml
+  type-aliases-package: com.example.common.model
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

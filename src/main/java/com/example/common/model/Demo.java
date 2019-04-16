@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class Demo extends BaseObject implements Serializable {
     private String id;
     private String name;
-    private String age;
+    private int age;
 
     public String getId() {
         return id;
@@ -30,11 +30,11 @@ public class Demo extends BaseObject implements Serializable {
         this.name = name;
     }
 
-    public String getAge() {
+    public int getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(int age) {
         this.age = age;
     }
 }

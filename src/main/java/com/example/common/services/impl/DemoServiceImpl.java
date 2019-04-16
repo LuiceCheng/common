@@ -31,7 +31,7 @@ public class DemoServiceImpl extends BaseServiceImpl<Demo> implements IDemoServi
             record.setId(IdWorker.getIdString());
         }
         if(StringUtils.isEmpty(record.getAge())){
-            record.setAge("0");
+            record.setAge(0);
         }
     }
 }
