@@ -4,8 +4,48 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/plugins/jquery-validation/js/jquery.validate.js}"></script>
+<script type="text/javascript" th:src="@{/static/plugins/jquery-form/jQuery-form.js}"></script>
+<script type="text/javascript">
+   $(function(){
+      var contextPath = $('#contextPath').attr('href');
+      alert(contextPath);
+      $("#demo").on('submit', function(){
+        var options = {
+          url:contextPath+'/fastdfs/upload/file/sample',
+          type:'POST',
+          dataType: 'json',
+          contentType:'multipart/form-data',
+          success: function(data){
+            console.info(data);
+            var a = data.filePath;
+            var url = contextPath+"/fastdfs/download?filePath="+a;
+            $("#demoDownload").attr("href",url);
+          }
+        };
+        $("#demo").ajaxSubmit(options);
+        return false;
+
+      })
+    });
+</script>
 <body>
-<h1>chenggong</h1>
+<a th:href="${#httpServletRequest.getScheme() + '://' + #httpServletRequest.getServerName() + ':' + #request.getServerPort()  + #request.getContextPath() + '/'} "
+   id="contextPath"></a>
+<h1 id="tes">chenggong</h1>
 <div th:text="${hello}"></div>
+
+<form method="post" enctype="multipart/form-data" id="demo">
+    文件<input type="file" name="file">
+    <input type="submit" value="上传">
+</form>
+
+<a href="" id="demoDownload">下载</a>
 </body>
+
+<script th:inline="javascript">
+    var context = /*[[@{/}]]*/+"";
+    console.info("获取contextPath-"+context);
+</script>
 </html>

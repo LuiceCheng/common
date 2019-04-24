@@ -30,6 +30,7 @@ spring:
     view:
       prefix: /
       suffix: .html
+    static-path-pattern: /static/**
 
   redis:
     database: 0
@@ -46,6 +47,10 @@ spring:
       max-idle: 10
     # 连接池中的最小空闲连接
       min-idle: 0
+
+  thymeleaf:
+    cache: false
+
 server:
   port: 8082
   servlet:
