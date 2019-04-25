@@ -61,3 +61,15 @@ mybatis-plus:
   type-aliases-package: com.example.common.model
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+codeImg:
+  path: D:/data/twoDimensionCode/
+  save-zip-path: D:/data/codeImgZip/
+
+aliyun:
+  oss:
+    endpoint: oss-cn-shenzhen.aliyuncs.com
+    accessKeyId: LTAIoAyXiyPJPUKz
+    secretAccessKey: QkO4zAsE0MeTWb2raO0yWkCW2E619Y
+    bucketName: bmms-test-app

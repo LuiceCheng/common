@@ -10,7 +10,6 @@
 <script type="text/javascript">
    $(function(){
       var contextPath = $('#contextPath').attr('href');
-      alert(contextPath);
       $("#demo").on('submit', function(){
         var options = {
           url:contextPath+'/fastdfs/upload/file/sample',
@@ -27,7 +26,25 @@
         $("#demo").ajaxSubmit(options);
         return false;
 
-      })
+      });
+      $("#ossDemo").on('submit', function(){
+       var options = {
+         url:contextPath+'oss/test/save',
+         type:'POST',
+         dataType: 'json',
+         contentType:'multipart/form-data',
+         success: function(data){
+           console.info(data);
+           var a = data.ossFileName;
+           var b = data.originalFilename;
+           var url = contextPath+"oss/test/download?filePath="+a+"&originalFilename="+b;
+           $("#ossDemoDownload").attr("href",url);
+         }
+       };
+       $("#ossDemo").ajaxSubmit(options);
+       return false;
+
+     });
     });
 </script>
 <body>
@@ -41,7 +58,13 @@
     <input type="submit" value="上传">
 </form>
 
+<form method="post" enctype="multipart/form-data" id="ossDemo">
+    oss-文件<input type="file" name="file">
+    <input type="submit" value="上传">
+</form>
+
 <a href="" id="demoDownload">下载</a>
+<a href="" id="ossDemoDownload">oss-下载</a>
 </body>
 
 <script th:inline="javascript">
