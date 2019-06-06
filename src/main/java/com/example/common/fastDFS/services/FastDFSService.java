@@ -1,6 +1,8 @@
 package com.example.common.fastDFS.services;
 
 import com.example.common.fastDFS.client.*;
+import com.example.common.fastDFS.myFastdfsClient.MyFastDFSClient;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
@@ -22,10 +24,15 @@ import java.util.Locale;
 @PropertySource("classpath:config.properties")
 public class FastDFSService {
   private FastDFSClient fastDFSClient = new FastDFSClient();
+  private MyFastDFSClient myFastDFSClient = new MyFastDFSClient();
+
   @Value("${fastdfs.http_secret_key}")
   private String fastDFSHttpSecretKey;
   @Value("${file_server_addr}")
   private String fileServerAddr;
+
+  @Value("${storage_port}")
+  private String storagePort;
 
   /**
    * 根据指定的路径删除服务器文件，适用于没有保存数据库记录的文件
@@ -136,10 +143,17 @@ public class FastDFSService {
    * @return
    */
   public FileResponseData uploadSample(MultipartFile file, HttpServletRequest request, boolean withToken) {
+    String ip = fileServerAddr;
+    String port = storagePort;
+    String filepath;
     FileResponseData responseData = new FileResponseData();
     try {
       // 上传到服务器
-      String filepath = fastDFSClient.uploadFileWithMultipart(file);
+      if(StringUtils.isEmpty(port)){
+        filepath = fastDFSClient.uploadFileWithMultipart(file);
+      }else {
+        filepath = myFastDFSClient.uploadFileWithMultipart(file, ip, port);
+      }
 
       responseData.setFileName(file.getOriginalFilename());
       responseData.setFilePath(filepath);
