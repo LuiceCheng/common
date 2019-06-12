@@ -28,6 +28,9 @@ public class BaseController {
     @Autowired
     private RedisRepository redisRepository;
 
+    @Autowired
+    private HttpServletRequest request1;
+
     @RequestMapping("/index")
     public String base(HttpServletRequest request){
         return "index";
@@ -36,12 +39,15 @@ public class BaseController {
     @RequestMapping("/success")
     public String success(Map<String,Object> map){
         logger.info("wolaila");
-        map.put("hello","<h2>nihao</h2>");
+        map.put("hello","<h2>nihao2</h2>");
         Demo demo = new Demo();
         demo.setName("zhangsan");
         demoService.selectByExample(demo);
         redisRepository.set("abc","张三");
-        String abc = redisRepository.get("abc");
+        String id = request1.getSession().getId();
+        logger.info(id);
+        Map<String, String> hashValue = redisRepository.getHashValue("spring:session:sessions:"+id);
+        map.put("sessionId", id);
         return "succes";
     }
 }

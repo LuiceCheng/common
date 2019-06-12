@@ -2,3 +2,15 @@ server:
   port: 8081
   servlet:
     context-path: /cxs
+
+
+codeImg:
+  path: D:/data/twoDimensionCode/
+  save-zip-path: D:/data/codeImgZip/
+
+aliyun:
+  oss:
+    endpoint: oss-cn-shenzhen.aliyuncs.com
+    accessKeyId: LTAIoAyXiyPJPUKz
+    secretAccessKey: QkO4zAsE0MeTWb2raO0yWkCW2E619Y
+    bucketName: bmms-test-app
