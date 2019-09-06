@@ -11,4 +11,5 @@ public class RedisConfig {
   public RedisRepository redisRepository(RedisTemplate<String, String> redisTemplate) {
     return new RedisRepository(redisTemplate);
   }
+
 }

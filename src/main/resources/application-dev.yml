@@ -2,12 +2,12 @@ spring:
   profiles:
     active: dev
   datasource:
-#    url: jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
-#    username: root
-#    password: 123abc
-    url: jdbc:mysql://192.168.99.100:3306/demo?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
+    url: jdbc:mysql://10.192.35.58:3308/dev_bms?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
     username: root
     password: 123456
+#    url: jdbc:mysql://192.168.99.100:3306/demo?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
+#    username: root
+#    password: 123456
   mvc:
     view:
       prefix: /
