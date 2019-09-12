@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.common.dao.IRoleDao">
+    <resultMap id="BaseResultMap" type="com.example.common.model.Role">
+        <!--
+          警告 -
+          此语句为代码生成器自动生成,请勿更改
+        -->
+        <result column="role_id" jdbcType="CHAR" property="roleId" />
+        <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <!--
+          警告 -
+          此语句为代码生成器自动生成,请勿更改
+        -->
+        <where>
+            1=1
+            <if test = "roleId != null and roleId != ''">
+                and role_id = #{roleId,jdbcType=CHAR}
+            </if>
+            <if test = "roleName != null and roleName != ''">
+                and role_name = #{roleName,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="Prefixed_Example_Where_Clause">
+        <!--
+          警告 -
+          此语句为代码生成器自动生成,请勿更改
+        -->
+        <where>
+            1=1
+            <if test="record.roleId != null and record.roleId != ''">
+                and role_id = #{record.roleId,jdbcType=CHAR}
+            </if>
+            <if test="record.roleName != null and record.roleName != ''">
+                and role_name = #{record.roleName,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        <!--
+          警告 -
+          此语句为代码生成器自动生成,请勿更改
+        -->
+        role_id,
+        role_name    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap">
+        <!--
+          警告 -
+          此语句为代码生成器自动生成,请勿更改
+        -->
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+            from role
+        <include refid="Prefixed_Example_Where_Clause" />
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        select
+        <include refid="Base_Column_List" />
+        from role
+        where
+        role_id = #{roleId,jdbcType=CHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        delete from role
+        where
+        role_id = #{roleId,jdbcType=CHAR}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.example.common.model.Role">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        delete from role
+        <include refid="Example_Where_Clause" />
+    </delete>
+
+    <insert id="insert" parameterType="com.example.common.model.Role">
+      <!--
+        警告 -
+        此语句为代码生成器自动生成,请勿更改
+      -->
+        insert into role(
+        role_id,
+        role_name)
+        values
+        (#{roleId,jdbcType=CHAR},
+        #{roleName,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.example.common.model.Role">
+      <!--
+        警告 -
+        此语句为代码生成器自动生成,请勿更改
+      -->
+        insert into role
+        <trim> prefix="(" suffix=")" suffixOverrides=",">
+            <if test="roleId != null and roleId != ''">
+                role_id,
+            </if>
+            <if test="roleName != null and roleName != ''">
+                role_name            </if>
+        </trim>
+        <trim> prefix="(" suffix=")" suffixOverrides=",">
+            <if test="roleId != null and roleId != ''">
+                #{role_id,jdbcType=${$column.mybatisJdbcType}},
+            </if>
+            <if test="roleName != null and roleName != ''">
+                #{role_name,jdbcType=${$column.mybatisJdbcType}}            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.example.common.model.Role" resultType="java.lang.Long">
+      <!--
+        警告 -
+        此语句为代码生成器自动生成,请勿更改
+      -->
+        select count(1) from role
+        <include refid="Example_Where_Clause" />
+    </select>
+
+    <update id="updateByExampleSelective">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        update role
+        <set>
+            <if test="record.roleId != null and record.roleId != ''">
+                role_id = #{record.roleId,jdbcType=CHAR}
+            </if>
+            <if test="record.roleName != null and record.roleName != ''">
+                role_name = #{record.roleName,jdbcType=VARCHAR}
+            </if>
+        </set>
+        <include refid="Prefixed_Example_Where_Clause" />
+    </update>
+    <update id="updateByExample">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        update role set
+        role_id = #{record.roleId,jdbcType=CHAR},
+        role_name = #{record.roleName,jdbcType=VARCHAR}
+        <include refid="Prefixed_Example_Where_Clause" />
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.example.common.model.Role">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        update role
+        <set>
+            <if test="roleName != null and roleName != ''">
+                role_name = #{roleName,jdbcType=VARCHAR}            </if>
+
+        </set>
+        where
+        role_id = #{roleId,jdbcType=VARCHAR}
+
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.example.common.model.Role">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        update role
+        set
+        role_name = #{roleName,jdbcType=VARCHAR}
+        where
+        role_id = #{roleId,jdbcType=VARCHAR}
+    </update>
+
+    <insert id="batchInsert" parameterType="java.util.List">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        insert into role(
+        role_id,
+        role_name)
+        values
+        <foreach collection="list" index="index" item="item" separator=",">
+        (
+        #{item.roleId,jdbcType=CHAR},
+        #{item.roleName,jdbcType=VARCHAR}
+        )
+        </foreach>
+    </insert>
+
+
+    <insert id="batchInsertSelective" parameterType="java.util.List">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        <foreach collection="list" index="index" item="item" separator=";">
+            insert into role
+            <set>
+                <if test="item.roleId != null and item.roleId != ''">
+                    role_id = #{roleId,jdbcType=CHAR},
+                </if>
+                <if test="item.roleName != null and item.roleName != ''">
+                    role_name = #{roleName,jdbcType=VARCHAR}                </if>
+            </set>
+        </foreach>
+    </insert>
+
+    <delete id="batchDeleteByPrimaryKey" parameterType="java.util.List">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+         -->
+        delete from role
+        where
+        role_id
+        in
+        <foreach close=")" collection="items" index="index" item="item" open="(" separator=",">
+          #{item}
+        </foreach>
+    </delete>
+
+    <update id="batchUpdateByPrimaryKey" parameterType="java.util.List">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+         -->
+        <foreach collection="list" index="index" item="item" separator=";">
+            update role
+            set
+            role_name = #{item.roleName,jdbcType=VARCHAR}
+            where
+            role_id = #{item.roleId,jdbcType=CHAR}
+        </foreach>
+    </update>
+
+    <update id="batchUpdateByPrimaryKeySelective" parameterType="java.util.List">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        <foreach collection="list" index="index" item="item" separator=";">
+            update role
+            <set>
+                <if test="item.roleName != null and item.roleName != ''">
+                    role_name = #{item.roleName,jdbcType=VARCHAR}
+                </if>
+              </set>
+            where
+            role_id = #{item.roleId,jdbcType=CHAR}
+        </foreach>
+    </update>
+
+    <select id="selectByExampleByPager" resultMap="BaseResultMap">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        select * from role
+        <include refid="Prefixed_Example_Where_Clause" />
+    </select>
+    <select id="fuzzySearch" resultMap="BaseResultMap">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM role
+        <include refid="fuzzy_search_where_map" />
+    </select>
+
+    <sql id="fuzzy_search_where_map">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        <where>
+            <if test="roleId != null and roleId != ''">
+                and role_id like concat('%',#{roleId,jdbcType=CHAR}, '%')
+            </if>
+            <if test="roleName != null and roleName != ''">
+                and role_name like concat('%',#{roleName,jdbcType=VARCHAR}, '%')
+            </if>
+        </where>
+    </sql>
+
+    <select id="fuzzySearchByPager" resultMap="BaseResultMap">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM role
+        <include refid="fuzzy_search_where_pager_map" />
+    </select>
+
+    <sql id="fuzzy_search_where_pager_map">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        <where>
+            <if test="item.roleId != null and item.roleId != ''">
+                  and role_id like concat('%',#{item.roleId,jdbcType=CHAR}, '%')
+            </if>
+            <if test="item.roleName != null and item.roleName != ''">
+                  and role_name like concat('%',#{item.roleName,jdbcType=VARCHAR}, '%')
+            </if>
+        </where>
+    </sql>
+</mapper>

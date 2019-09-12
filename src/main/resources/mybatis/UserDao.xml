@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.common.dao.IUserDao">
+    <resultMap id="BaseResultMap" type="com.example.common.model.User">
+        <!--
+          警告 -
+          此语句为代码生成器自动生成,请勿更改
+        -->
+        <result column="user_id" jdbcType="CHAR" property="userId" />
+        <result column="user_name" jdbcType="VARCHAR" property="userName" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <!--
+          警告 -
+          此语句为代码生成器自动生成,请勿更改
+        -->
+        <where>
+            1=1
+            <if test = "userId != null and userId != ''">
+                and user_id = #{userId,jdbcType=CHAR}
+            </if>
+            <if test = "userName != null and userName != ''">
+                and user_name = #{userName,jdbcType=VARCHAR}
+            </if>
+            <if test = "password != null and password != ''">
+                and password = #{password,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="Prefixed_Example_Where_Clause">
+        <!--
+          警告 -
+          此语句为代码生成器自动生成,请勿更改
+        -->
+        <where>
+            1=1
+            <if test="record.userId != null and record.userId != ''">
+                and user_id = #{record.userId,jdbcType=CHAR}
+            </if>
+            <if test="record.userName != null and record.userName != ''">
+                and user_name = #{record.userName,jdbcType=VARCHAR}
+            </if>
+            <if test="record.password != null and record.password != ''">
+                and password = #{record.password,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        <!--
+          警告 -
+          此语句为代码生成器自动生成,请勿更改
+        -->
+        user_id,
+        user_name,
+        password    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap">
+        <!--
+          警告 -
+          此语句为代码生成器自动生成,请勿更改
+        -->
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+            from user
+        <include refid="Prefixed_Example_Where_Clause" />
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        select
+        <include refid="Base_Column_List" />
+        from user
+        where
+        user_id = #{userId,jdbcType=CHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        delete from user
+        where
+        user_id = #{userId,jdbcType=CHAR}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.example.common.model.User">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        delete from user
+        <include refid="Example_Where_Clause" />
+    </delete>
+
+    <insert id="insert" parameterType="com.example.common.model.User">
+      <!--
+        警告 -
+        此语句为代码生成器自动生成,请勿更改
+      -->
+        insert into user(
+        user_id,
+        user_name,
+        password)
+        values
+        (#{userId,jdbcType=CHAR},
+        #{userName,jdbcType=VARCHAR},
+        #{password,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.example.common.model.User">
+      <!--
+        警告 -
+        此语句为代码生成器自动生成,请勿更改
+      -->
+        insert into user
+        <trim> prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null and userId != ''">
+                user_id,
+            </if>
+            <if test="userName != null and userName != ''">
+                user_name,
+            </if>
+            <if test="password != null and password != ''">
+                password            </if>
+        </trim>
+        <trim> prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null and userId != ''">
+                #{user_id,jdbcType=${$column.mybatisJdbcType}},
+            </if>
+            <if test="userName != null and userName != ''">
+                #{user_name,jdbcType=${$column.mybatisJdbcType}},
+            </if>
+            <if test="password != null and password != ''">
+                #{password,jdbcType=${$column.mybatisJdbcType}}            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.example.common.model.User" resultType="java.lang.Long">
+      <!--
+        警告 -
+        此语句为代码生成器自动生成,请勿更改
+      -->
+        select count(1) from user
+        <include refid="Example_Where_Clause" />
+    </select>
+
+    <update id="updateByExampleSelective">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        update user
+        <set>
+            <if test="record.userId != null and record.userId != ''">
+                user_id = #{record.userId,jdbcType=CHAR}
+            </if>
+            <if test="record.userName != null and record.userName != ''">
+                user_name = #{record.userName,jdbcType=VARCHAR}
+            </if>
+            <if test="record.password != null and record.password != ''">
+                password = #{record.password,jdbcType=VARCHAR}
+            </if>
+        </set>
+        <include refid="Prefixed_Example_Where_Clause" />
+    </update>
+    <update id="updateByExample">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        update user set
+        user_id = #{record.userId,jdbcType=CHAR},
+        user_name = #{record.userName,jdbcType=VARCHAR},
+        password = #{record.password,jdbcType=VARCHAR}
+        <include refid="Prefixed_Example_Where_Clause" />
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.example.common.model.User">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        update user
+        <set>
+            <if test="userName != null and userName != ''">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password,jdbcType=VARCHAR}            </if>
+
+        </set>
+        where
+        user_id = #{userId,jdbcType=VARCHAR}
+
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.example.common.model.User">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        update user
+        set
+        user_name = #{userName,jdbcType=VARCHAR},
+        password = #{password,jdbcType=VARCHAR}
+        where
+        user_id = #{userId,jdbcType=VARCHAR}
+    </update>
+
+    <insert id="batchInsert" parameterType="java.util.List">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        insert into user(
+        user_id,
+        user_name,
+        password)
+        values
+        <foreach collection="list" index="index" item="item" separator=",">
+        (
+        #{item.userId,jdbcType=CHAR},
+        #{item.userName,jdbcType=VARCHAR},
+        #{item.password,jdbcType=VARCHAR}
+        )
+        </foreach>
+    </insert>
+
+
+    <insert id="batchInsertSelective" parameterType="java.util.List">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        <foreach collection="list" index="index" item="item" separator=";">
+            insert into user
+            <set>
+                <if test="item.userId != null and item.userId != ''">
+                    user_id = #{userId,jdbcType=CHAR},
+                </if>
+                <if test="item.userName != null and item.userName != ''">
+                    user_name = #{userName,jdbcType=VARCHAR},
+                </if>
+                <if test="item.password != null and item.password != ''">
+                    password = #{password,jdbcType=VARCHAR}                </if>
+            </set>
+        </foreach>
+    </insert>
+
+    <delete id="batchDeleteByPrimaryKey" parameterType="java.util.List">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+         -->
+        delete from user
+        where
+        user_id
+        in
+        <foreach close=")" collection="items" index="index" item="item" open="(" separator=",">
+          #{item}
+        </foreach>
+    </delete>
+
+    <update id="batchUpdateByPrimaryKey" parameterType="java.util.List">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+         -->
+        <foreach collection="list" index="index" item="item" separator=";">
+            update user
+            set
+            user_name = #{item.userName,jdbcType=VARCHAR},
+            password = #{item.password,jdbcType=VARCHAR}
+            where
+            user_id = #{item.userId,jdbcType=CHAR}
+        </foreach>
+    </update>
+
+    <update id="batchUpdateByPrimaryKeySelective" parameterType="java.util.List">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        <foreach collection="list" index="index" item="item" separator=";">
+            update user
+            <set>
+                <if test="item.userName != null and item.userName != ''">
+                    user_name = #{item.userName,jdbcType=VARCHAR},
+
+                </if>
+                <if test="item.password != null and item.password != ''">
+                    password = #{item.password,jdbcType=VARCHAR}
+                </if>
+              </set>
+            where
+            user_id = #{item.userId,jdbcType=CHAR}
+        </foreach>
+    </update>
+
+    <select id="selectByExampleByPager" resultMap="BaseResultMap">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        select * from user
+        <include refid="Prefixed_Example_Where_Clause" />
+    </select>
+    <select id="fuzzySearch" resultMap="BaseResultMap">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user
+        <include refid="fuzzy_search_where_map" />
+    </select>
+
+    <sql id="fuzzy_search_where_map">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        <where>
+            <if test="userId != null and userId != ''">
+                and user_id like concat('%',#{userId,jdbcType=CHAR}, '%')
+            </if>
+            <if test="userName != null and userName != ''">
+                and user_name like concat('%',#{userName,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="password != null and password != ''">
+                and password like concat('%',#{password,jdbcType=VARCHAR}, '%')
+            </if>
+        </where>
+    </sql>
+
+    <select id="fuzzySearchByPager" resultMap="BaseResultMap">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user
+        <include refid="fuzzy_search_where_pager_map" />
+    </select>
+
+    <sql id="fuzzy_search_where_pager_map">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        <where>
+            <if test="item.userId != null and item.userId != ''">
+                  and user_id like concat('%',#{item.userId,jdbcType=CHAR}, '%')
+            </if>
+            <if test="item.userName != null and item.userName != ''">
+                  and user_name like concat('%',#{item.userName,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="item.password != null and item.password != ''">
+                  and password like concat('%',#{item.password,jdbcType=VARCHAR}, '%')
+            </if>
+        </where>
+    </sql>
+</mapper>

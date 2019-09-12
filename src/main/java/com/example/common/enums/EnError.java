@@ -6,7 +6,7 @@ package com.example.common.enums;
  * @Description:
  */
 public enum EnError {
-    DEFAULT(0,""),
+    DEFAULT(0,"操作成功"),
     NO_MATCH(1,"没有匹配项"),
     INSERT_NONE(2,"插入失败"),
     DELETE_NONE(3,"删除失败"),

@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.common.dao.IResourceDao">
+    <resultMap id="BaseResultMap" type="com.example.common.model.Resource">
+        <!--
+          警告 -
+          此语句为代码生成器自动生成,请勿更改
+        -->
+        <result column="resource_id" jdbcType="CHAR" property="resourceId" />
+        <result column="resource_name" jdbcType="VARCHAR" property="resourceName" />
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <!--
+          警告 -
+          此语句为代码生成器自动生成,请勿更改
+        -->
+        <where>
+            1=1
+            <if test = "resourceId != null and resourceId != ''">
+                and resource_id = #{resourceId,jdbcType=CHAR}
+            </if>
+            <if test = "resourceName != null and resourceName != ''">
+                and resource_name = #{resourceName,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="Prefixed_Example_Where_Clause">
+        <!--
+          警告 -
+          此语句为代码生成器自动生成,请勿更改
+        -->
+        <where>
+            1=1
+            <if test="record.resourceId != null and record.resourceId != ''">
+                and resource_id = #{record.resourceId,jdbcType=CHAR}
+            </if>
+            <if test="record.resourceName != null and record.resourceName != ''">
+                and resource_name = #{record.resourceName,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        <!--
+          警告 -
+          此语句为代码生成器自动生成,请勿更改
+        -->
+        resource_id,
+        resource_name    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap">
+        <!--
+          警告 -
+          此语句为代码生成器自动生成,请勿更改
+        -->
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+            from resource
+        <include refid="Prefixed_Example_Where_Clause" />
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        select
+        <include refid="Base_Column_List" />
+        from resource
+        where
+        resource_id = #{resourceId,jdbcType=CHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        delete from resource
+        where
+        resource_id = #{resourceId,jdbcType=CHAR}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.example.common.model.Resource">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        delete from resource
+        <include refid="Example_Where_Clause" />
+    </delete>
+
+    <insert id="insert" parameterType="com.example.common.model.Resource">
+      <!--
+        警告 -
+        此语句为代码生成器自动生成,请勿更改
+      -->
+        insert into resource(
+        resource_id,
+        resource_name)
+        values
+        (#{resourceId,jdbcType=CHAR},
+        #{resourceName,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.example.common.model.Resource">
+      <!--
+        警告 -
+        此语句为代码生成器自动生成,请勿更改
+      -->
+        insert into resource
+        <trim> prefix="(" suffix=")" suffixOverrides=",">
+            <if test="resourceId != null and resourceId != ''">
+                resource_id,
+            </if>
+            <if test="resourceName != null and resourceName != ''">
+                resource_name
+            </if>
+        </trim>
+        <trim> prefix="(" suffix=")" suffixOverrides=",">
+            <if test="resourceId != null and resourceId != ''">
+                #{resource_id,jdbcType=${$column.mybatisJdbcType}},
+            </if>
+            <if test="resourceName != null and resourceName != ''">
+                #{resource_name,jdbcType=${$column.mybatisJdbcType}}
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.example.common.model.Resource" resultType="java.lang.Long">
+      <!--
+        警告 -
+        此语句为代码生成器自动生成,请勿更改
+      -->
+        select count(1) from resource
+        <include refid="Example_Where_Clause" />
+    </select>
+
+    <update id="updateByExampleSelective">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        update resource
+        <set>
+            <if test="record.resourceId != null and record.resourceId != ''">
+                resource_id = #{record.resourceId,jdbcType=CHAR}
+            </if>
+            <if test="record.resourceName != null and record.resourceName != ''">
+                resource_name = #{record.resourceName,jdbcType=VARCHAR}
+            </if>
+        </set>
+        <include refid="Prefixed_Example_Where_Clause" />
+    </update>
+    <update id="updateByExample">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        update resource set
+        resource_id = #{record.resourceId,jdbcType=CHAR},
+        resource_name = #{record.resourceName,jdbcType=VARCHAR}
+        <include refid="Prefixed_Example_Where_Clause" />
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.example.common.model.Resource">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        update resource
+        <set>
+            <if test="resourceName != null and resourceName != ''">
+                resource_name = #{resourceName,jdbcType=VARCHAR}
+            </if>
+
+        </set>
+        where
+        resource_id = #{resourceId,jdbcType=VARCHAR}
+
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.example.common.model.Resource">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        update resource
+        set
+        resource_name = #{resourceName,jdbcType=VARCHAR}
+        where
+        resource_id = #{resourceId,jdbcType=VARCHAR}
+    </update>
+
+    <insert id="batchInsert" parameterType="java.util.List">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        insert into resource(
+        resource_id,
+        resource_name)
+        values
+        <foreach collection="list" index="index" item="item" separator=",">
+        (
+        #{item.resourceId,jdbcType=CHAR},
+        #{item.resourceName,jdbcType=VARCHAR}
+        )
+        </foreach>
+    </insert>
+
+
+    <insert id="batchInsertSelective" parameterType="java.util.List">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        <foreach collection="list" index="index" item="item" separator=";">
+            insert into resource
+            <set>
+                <if test="item.resourceId != null and item.resourceId != ''">
+                    resource_id = #{resourceId,jdbcType=CHAR},
+                </if>
+                <if test="item.resourceName != null and item.resourceName != ''">
+                    resource_name = #{resourceName,jdbcType=VARCHAR}
+                </if>
+            </set>
+        </foreach>
+    </insert>
+
+    <delete id="batchDeleteByPrimaryKey" parameterType="java.util.List">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+         -->
+        delete from resource
+        where
+        resource_id
+        in
+        <foreach close=")" collection="items" index="index" item="item" open="(" separator=",">
+          #{item}
+        </foreach>
+    </delete>
+
+    <update id="batchUpdateByPrimaryKey" parameterType="java.util.List">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+         -->
+        <foreach collection="list" index="index" item="item" separator=";">
+            update resource
+            set
+            resource_name = #{item.resourceName,jdbcType=VARCHAR}
+            where
+            resource_id = #{item.resourceId,jdbcType=CHAR}
+        </foreach>
+    </update>
+
+    <update id="batchUpdateByPrimaryKeySelective" parameterType="java.util.List">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        <foreach collection="list" index="index" item="item" separator=";">
+            update resource
+            <set>
+                <if test="item.resourceName != null and item.resourceName != ''">
+                    resource_name = #{item.resourceName,jdbcType=VARCHAR}
+                </if>
+              </set>
+            where
+            resource_id = #{item.resourceId,jdbcType=CHAR}
+        </foreach>
+    </update>
+
+    <select id="selectByExampleByPager" resultMap="BaseResultMap">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        select * from resource
+        <include refid="Prefixed_Example_Where_Clause" />
+    </select>
+    <select id="fuzzySearch" resultMap="BaseResultMap">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM resource
+        <include refid="fuzzy_search_where_map" />
+    </select>
+
+    <sql id="fuzzy_search_where_map">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        <where>
+            <if test="resourceId != null and resourceId != ''">
+                and resource_id like concat('%',#{resourceId,jdbcType=CHAR}, '%')
+            </if>
+            <if test="resourceName != null and resourceName != ''">
+                and resource_name like concat('%',#{resourceName,jdbcType=VARCHAR}, '%')
+            </if>
+        </where>
+    </sql>
+
+    <select id="fuzzySearchByPager" resultMap="BaseResultMap">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM resource
+        <include refid="fuzzy_search_where_pager_map" />
+    </select>
+
+    <sql id="fuzzy_search_where_pager_map">
+        <!--
+            警告 -
+            此语句为代码生成器自动生成,请勿更改
+        -->
+        <where>
+            <if test="item.resourceId != null and item.resourceId != ''">
+                  and resource_id like concat('%',#{item.resourceId,jdbcType=CHAR}, '%')
+            </if>
+            <if test="item.resourceName != null and item.resourceName != ''">
+                  and resource_name like concat('%',#{item.resourceName,jdbcType=VARCHAR}, '%')
+            </if>
+        </where>
+    </sql>
+</mapper>

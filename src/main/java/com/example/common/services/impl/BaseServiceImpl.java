@@ -162,7 +162,7 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
       Method setCreateBy = record.getClass().getMethod("setCreateBy", String.class);
       setCreateBy.invoke(record, user.getUserId());
     } catch (Exception e) {
-      logger.error("get user error{}", e);
+      logger.error("set CreateInfo error:{}", "无对应方法");
     }
   }
 
@@ -174,7 +174,7 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
       Method setUpdateBy = record.getClass().getMethod("setUpdateBy", String.class);
       setUpdateBy.invoke(record, user.getUserId());
     } catch (Exception e) {
-      logger.error("get user error{}", e);
+      logger.error("setUpdate Info error:{}", "无对应方法");
     }
   }
 }
