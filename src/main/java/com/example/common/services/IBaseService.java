@@ -21,7 +21,7 @@ public interface IBaseService<T> {
 
     Msg<List<T>> batchInsert(List<T> records);
 
-    Msg<List<T>> batchInsertSelective(List<T> record);
+    Msg<List<T>> batchInsertSelective(List<T> records);
 
     Msg<Boolean> deleteByPrimaryKey(String keys);
 
@@ -37,9 +37,9 @@ public interface IBaseService<T> {
 
     Msg<T> updateByExampleSelective(T example, T record);
 
-    Msg<List<T>> batchUpdateByPrimaryKey(List<T> record);
+    Msg<List<T>> batchUpdateByPrimaryKey(List<T> records);
 
-    Msg<List<T>> batchUpdateByPrimaryKeySelective(List<T> record);
+    Msg<List<T>> batchUpdateByPrimaryKeySelective(List<T> records);
 
     Msg<T> selectByPrimaryKey(String keys);
 

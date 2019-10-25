@@ -28,7 +28,7 @@ public interface IBaseDao<T> {
 
     int deleteByExample(T record);
 
-    int batchDeleteByPrimaryKey(@Param("items") String keys);
+    int batchDeleteByPrimaryKey(@Param("items") String[] keys);
 
     int updateByPrimaryKey(T record);
 

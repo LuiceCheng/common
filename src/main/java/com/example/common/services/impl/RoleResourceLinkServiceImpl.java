@@ -18,4 +18,19 @@ public class RoleResourceLinkServiceImpl extends BaseServiceImpl<RoleResourceLin
     public IBaseDao<RoleResourceLink> getRepositoryDao() {
         return null;
     }
+
+    @Override
+    public String getPrimaryKeyValue(RoleResourceLink record) {
+        return null;
+    }
+
+    @Override
+    public void emptyPrimaryKeyValue(RoleResourceLink record) {
+
+    }
+
+    @Override
+    public void setDefaults(RoleResourceLink record) {
+
+    }
 }

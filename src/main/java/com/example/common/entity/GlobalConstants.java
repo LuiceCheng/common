@@ -8,4 +8,6 @@ package com.example.common.entity;
  */
 public class GlobalConstants {
     public static final String AES_KEY ="ABX0s4eEswnWS903@3s3";
+
+    public static final int BATCH_INSERT_SIZE = 1000;
 }

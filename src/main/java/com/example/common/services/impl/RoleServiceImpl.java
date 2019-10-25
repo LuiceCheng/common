@@ -17,4 +17,19 @@ public class RoleServiceImpl extends  BaseServiceImpl<Role> implements IRoleServ
     public IBaseDao<Role> getRepositoryDao() {
         return null;
     }
+
+    @Override
+    public String getPrimaryKeyValue(Role record) {
+        return null;
+    }
+
+    @Override
+    public void emptyPrimaryKeyValue(Role record) {
+
+    }
+
+    @Override
+    public void setDefaults(Role record) {
+
+    }
 }

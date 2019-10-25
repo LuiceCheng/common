@@ -34,4 +34,14 @@ public class DemoServiceImpl extends BaseServiceImpl<Demo> implements IDemoServi
             record.setAge(0);
         }
     }
+
+    @Override
+    public String getPrimaryKeyValue(Demo record) {
+        return record.getId();
+    }
+
+    @Override
+    public void emptyPrimaryKeyValue(Demo record) {
+
+    }
 }

@@ -24,7 +24,6 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements IUserServi
 
     @Override
     public void setDefaults(User record) {
-        super.setDefaults(record);
         String userId = record.getUserId();
         if(StringUtils.isEmpty(userId)){
             userId = IdWorker.getIdString();
@@ -40,5 +39,15 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements IUserServi
     @Override
     public IBaseDao<User> getRepositoryDao() {
         return this.userDao;
+    }
+
+    @Override
+    public String getPrimaryKeyValue(User record) {
+        return null;
+    }
+
+    @Override
+    public void emptyPrimaryKeyValue(User record) {
+
     }
 }

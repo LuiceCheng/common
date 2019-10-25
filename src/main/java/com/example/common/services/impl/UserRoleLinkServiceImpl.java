@@ -18,4 +18,19 @@ public class UserRoleLinkServiceImpl extends BaseServiceImpl<UserRoleLink> imple
     public IBaseDao<UserRoleLink> getRepositoryDao() {
         return null;
     }
+
+    @Override
+    public String getPrimaryKeyValue(UserRoleLink record) {
+        return null;
+    }
+
+    @Override
+    public void emptyPrimaryKeyValue(UserRoleLink record) {
+
+    }
+
+    @Override
+    public void setDefaults(UserRoleLink record) {
+
+    }
 }
