@@ -4,10 +4,15 @@ package com.example.common.config.security.jwt;
 
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.CompressionCodecs;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * description:
@@ -31,7 +36,9 @@ public class JwtUtil {
      */
     private static final String SECRET = "sdf8kwei@128@@R#^&@!asdjfaASDFAEdeigkGKiedce(*&";
 
-    public static Claims parse(String token) {
+    private final SignatureAlgorithm SIGNATURE_ALGORITHM = SignatureAlgorithm.HS256;
+
+    public static Claims getClaimsFromToken(String token) {
         try {
             return Jwts.parser()
                 // 验签
@@ -55,5 +62,21 @@ public class JwtUtil {
         }
 
         return token;
+    }
+
+    public String generateToken(String subject, Map<String, Object> claims, long expiration){
+        return Jwts.builder()
+            .setClaims(claims)
+            .setSubject(subject)
+            .setId(UUID.randomUUID().toString())
+            .setIssuedAt(new Date())
+            .setExpiration(generateExpirationDate(expiration))
+            .compressWith(CompressionCodecs.DEFLATE)
+            .signWith(SIGNATURE_ALGORITHM, SECRET)
+            .compact();
+    }
+
+    private Date generateExpirationDate(long expiration){
+        return new Date(System.currentTimeMillis() + expiration * 1000);
     }
 }

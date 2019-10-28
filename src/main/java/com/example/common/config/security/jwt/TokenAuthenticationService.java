@@ -33,7 +33,7 @@ public class TokenAuthenticationService {
 
         if (token != null && !"null".equals(token)) {
             // 解析 Token
-            Claims claims = (Claims) JwtUtil.parse(token);
+            Claims claims = (Claims) JwtUtil.getClaimsFromToken(token);
             if(null == claims){
                 throw new AccountExpiredException("token过期");
             }
@@ -45,6 +45,7 @@ public class TokenAuthenticationService {
 
             // 是否过期
             Date expiration = claims.getExpiration();
+
             if(expiration.compareTo(new Date()) > 0){
                 // 过期了 todo
             }
