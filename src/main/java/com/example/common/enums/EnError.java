@@ -18,7 +18,8 @@ public enum EnError {
     TIMEOUT(40001,"调用超时"),
     NONEMPTY_PARAM(40005,"缺少必填参数"),
     ILLEGAL_PARAM(40006,"参数不合法"),
-    SERVICE_INVALIID(40008,"服务不可用");
+    SERVICE_INVALIID(40008,"服务不可用"),
+    FORBIDDEN(403,"禁止");
 
     private Integer code = 0;
     private String description = "";
