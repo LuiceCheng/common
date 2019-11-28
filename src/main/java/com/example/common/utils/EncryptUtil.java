@@ -254,7 +254,7 @@ public class EncryptUtil {
      * @param key 秘钥
      * @return
      */
-    public String AESdecode(String res, String key) {
+    public static String AESdecode(String res, String key) {
         return keyGeneratorES(res, AES, key, keysizeAES, false);
     }
 

@@ -10,7 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.GenericFilterBean;
 
-import javax.security.auth.login.AccountExpiredException;
+import org.springframework.security.authentication.AccountExpiredException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -34,15 +34,10 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
         try {
             Authentication authentication = TokenAuthenticationService.getAuthentication((HttpServletRequest) request);
             SecurityContextHolder.getContext().setAuthentication(authentication);
-        } catch (Exception e) {
+        } catch (AccountExpiredException expiredException){
             Msg<String> msg = new Msg<>();
-            if(e instanceof AccountExpiredException){
-                msg.setMsg(e.getMessage());
-                msg.setResult(EnError.FORBIDDEN);
-            } else {
-                logger.error("异常 ", e);
-                return;
-            }
+            msg.setMsg(EnError.TOKEN_EXPIRED.getDescription());
+            msg.setResult(EnError.TOKEN_EXPIRED);
 
             HttpServletResponse httpServletResponse = (HttpServletResponse) response;
             httpServletResponse.setStatus(HttpStatus.FORBIDDEN.value());
@@ -56,6 +51,8 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
                 ((HttpServletResponse) response).setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             }
             return;
+        } catch (Exception e) {
+            logger.error("系统异常 ", e);
         }
 
 

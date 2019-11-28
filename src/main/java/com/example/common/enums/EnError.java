@@ -12,6 +12,7 @@ public enum EnError {
     DELETE_NONE(3,"删除失败"),
     UPDATE_NONE(4,"更新失败"),
     CONFLICT(5,"已经存在"),
+    TOKEN_EXPIRED(6,"token已过期"),
     SQL_ERROR(1000,"SQL执行失败"),
     EXECUTE_FAILED(4000,"执行失败"),
     SYSTEM_ERROR(500,"系统异常"),

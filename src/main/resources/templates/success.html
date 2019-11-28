@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/plugins/jquery-validation/js/jquery.validate.js}"></script>
+<script type="text/javascript" th:src="@{/static/plugins/jquery-form/jQuery-form.js}"></script>
+<script type="text/javascript">
+   $(function(){
+
+    });
+</script>
+<body>
+<a th:href="${#httpServletRequest.getScheme() + '://' + #httpServletRequest.getServerName() + ':' + #request.getServerPort()  + #request.getContextPath() + '/'} "
+   id="contextPath"></a>
+<h1 id="tes">welcome</h1>
+</body>
+</html>

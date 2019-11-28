@@ -44,7 +44,7 @@ public interface IBaseDao<T> {
 
     T selectByPrimaryKey(String key);
 
-    List<T> selectByExample(@Param("example") T record, @Param("distinct") boolean distinct);
+    List<T> selectByExample(@Param("record") T record, @Param("distinct") boolean distinct);
 
     PageList<T> selectByExampleByPager(@Param("example") T record, @Param("pageBounds") PageBounds pageBounds);
 

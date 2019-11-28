@@ -11,7 +11,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,7 +25,7 @@ public class TokenAuthenticationService {
     /**
      * JWT验证方法
      */
-    static Authentication getAuthentication(HttpServletRequest request) {
+    static Authentication getAuthentication(HttpServletRequest request) throws AccountExpiredException {
         logger.debug("get authentication from token");
         // 从Header中拿到token
         String token = JwtUtil.getToken(request);
@@ -44,11 +43,13 @@ public class TokenAuthenticationService {
             String details = (String) claims.get("details");
 
             // 是否过期
-            Date expiration = claims.getExpiration();
+//            Date expiration = claims.getExpiration();
 
-            if(expiration.compareTo(new Date()) > 0){
-                // 过期了 todo
-            }
+//            if(expiration.compareTo(new Date()) < 0){
+//                // 过期了 todo
+//                logger.error("token过期了,请重新登录");
+//                return null;
+//            }
 
             // 得到 权限（角色）
             List<GrantedAuthority> authorities = AuthorityUtils.commaSeparatedStringToAuthorityList((String) claims.get("authorities"));
