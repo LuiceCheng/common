@@ -34,7 +34,7 @@ public interface IBaseDao<T> {
 
     int updateByPrimaryKeySelective(T record);
 
-    int updateByExample(@Param("example") T example, @Param("record") T record);
+    int updateByExample(@Param("record") T record);
 
     int updateByExampleSelective(@Param("example") T example, @Param("record") T record);
 

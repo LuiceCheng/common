@@ -33,7 +33,7 @@ public interface IBaseService<T> {
 
     Msg<T> updateByPrimaryKeySelective(T record);
 
-    Msg<T> updateByExample(T example, T record);
+    Msg<T> updateByExample(T record);
 
     Msg<T> updateByExampleSelective(T example, T record);
 

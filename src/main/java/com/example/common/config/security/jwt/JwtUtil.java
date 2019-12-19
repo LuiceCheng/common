@@ -5,7 +5,6 @@ package com.example.common.config.security.jwt;
 
 import com.example.common.model.JwtUser;
 import io.jsonwebtoken.*;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 

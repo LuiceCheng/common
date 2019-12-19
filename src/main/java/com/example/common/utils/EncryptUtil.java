@@ -79,7 +79,7 @@ public class EncryptUtil {
      * @param key       加密使用的秘钥
      * @return
      */
-    private String keyGeneratorMac(String res, String algorithm, String key) {
+    private static String keyGeneratorMac(String res, String algorithm, String key) {
         try {
             SecretKey sk = null;
             if (key == null) {
@@ -189,7 +189,7 @@ public class EncryptUtil {
      * @param key 秘钥
      * @return
      */
-    public String MD5(String res, String key) {
+    public static String MD5(String res, String key) {
         return keyGeneratorMac(res, HmacMD5, key);
     }
 

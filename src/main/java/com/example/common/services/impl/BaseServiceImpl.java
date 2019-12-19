@@ -169,11 +169,11 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
     }
 
     @Override
-    public Msg<T> updateByExample(T example, T record) {
+    public Msg<T> updateByExample(T record) {
         Msg<T> msg = new Msg<>();
         setDefaults(record);
         setUpdateInfo(record);
-        int result = getRepositoryDao().updateByExample(example, record);
+        int result = getRepositoryDao().updateByExample(record);
         if (0 == result) {
             msg.setResult(EnError.UPDATE_NONE);
             return msg;

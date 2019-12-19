@@ -14,3 +14,12 @@ aliyun:
     accessKeyId: LTAIoAyXiyPJPUKz
     secretAccessKey: QkO4zAsE0MeTWb2raO0yWkCW2E619Y
     bucketName: bmms-test-app
+
+
+######## 短信
+ums:
+  sms:
+    url: https://api.ums86.com:9600/sms/Api/Send.do
+    spCode: 251743
+    loginName: ed_cjdq
+    password: cjdq2019
