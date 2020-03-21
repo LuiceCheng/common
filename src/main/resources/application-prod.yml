@@ -1,8 +1,8 @@
 spring:
   profiles:
-    active: dev
+    active: prod
   datasource:
-    url: jdbc:mysql://localhost:3309/demo?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&allowMultiQueries=true
+    url: jdbc:mysql://localhost:3309/demo?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
     username: root
     password: 123456
 #    url: jdbc:mysql://192.168.99.100:3306/demo?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC

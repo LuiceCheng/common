@@ -318,4 +318,9 @@ public class EncryptUtil {
     public String Base64Decode(String res) {
         return new String(Base64.decode(res));
     }
+
+    public static void main(String[] args) {
+        String s = AESencode("123456", "ABX0s4eEswnWS903@3s3");
+        System.out.printf(s);
+    }
 }

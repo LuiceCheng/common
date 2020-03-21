@@ -8,11 +8,15 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,7 +33,8 @@ import java.util.Hashtable;
  * @author:cxs
  * @date: 2019/2/21 15:33
  */
-@Controller
+@Api(value = "二维码")
+@RestController
 @RequestMapping("twoDimensionCode")
 public class TestTwoDimensionCodeController extends BaseController {
 
@@ -38,7 +43,8 @@ public class TestTwoDimensionCodeController extends BaseController {
   @Value("${codeImg.save-zip-path}")
   private String saveZipPath;
 
-  @RequestMapping(value = "/queryBBMemberList")
+  @ApiOperation(value = "二维码测试", tags = "二维码")
+  @GetMapping(value = "/queryBBMemberList")
   @ResponseBody
   public void queryBBMemberList(HttpServletRequest req, HttpServletResponse response) {
     response.setContentType("application/json");

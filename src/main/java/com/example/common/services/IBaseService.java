@@ -2,8 +2,8 @@ package com.example.common.services;
 
 import com.example.common.dao.IBaseDao;
 import com.example.common.entity.Msg;
-import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
-import com.github.miemiedev.mybatis.paginator.domain.PageList;
+import com.example.common.entity.PageBounds;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
@@ -47,13 +47,16 @@ public interface IBaseService<T> {
 
     Msg<List<T>> selectByExample(T record);
 
-    Msg<List<T>> selectAllByExample(T record);
-
-    Msg<PageList<T>> selectByExampleByPager(T record, PageBounds pageBounds);
+    /**
+     * 翻页查询
+     * @param record
+     * @return
+     */
+    Msg<PageInfo<T>> selectByPager(T record, PageBounds pageBounds);
 
     Msg<T> fuzzySearch(T record);
 
-    Msg<PageList<T>> fuzzySearchByPager(T record, PageBounds pageBounds);
+    Msg<PageInfo<T>> fuzzySearchByPager(T record, PageBounds pageBounds);
 
     IBaseDao<T> getRepositoryDao();
 

@@ -3,6 +3,8 @@ package com.example.common.utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.UUID;
+
 /**
  * @Author sen
  * @Date: 2019/3/14 21:15
@@ -91,6 +93,11 @@ public class IdWorker {
 
     private long timeGen() {
         return System.currentTimeMillis();
+    }
+
+    public static String getUUID(){
+        String uuid = UUID.randomUUID().toString();
+        return uuid;
     }
 
 }

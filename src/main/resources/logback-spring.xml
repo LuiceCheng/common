@@ -7,7 +7,7 @@
     <!-- 文件输出格式 -->
     <property name="PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n"/>
     <!-- 文件路径 -->
-    <property name="MY_DEV_FILE_PATH" value="D://logback/dev"/>
+    <property name="MY_DEV_FILE_PATH" value="E://code/common-log"/>
 
     <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
@@ -27,7 +27,7 @@
 
     <logger name="com.example.common.dao" level="INFO"></logger>
 
-    <springProfile name="201">
+    <springProfile name="dev1">
         <root level="INFO">
             <appender name="asyncFileAppenderTest" class="ch.qos.logback.classic.AsyncAppender">
                 <discardingThreshold>0</discardingThreshold>
@@ -44,6 +44,21 @@
                         <totalSizeCap>2GB</totalSizeCap>
                     </rollingPolicy>
 
+                    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                        <pattern>${PATTERN}</pattern>
+                    </encoder>
+                </appender>
+            </appender>
+        </root>
+    </springProfile>
+
+    <springProfile name="dev">
+        <root level="INFO">
+            <appender name="asyncFileAppenderTest" class="ch.qos.logback.classic.AsyncAppender">
+                <discardingThreshold>0</discardingThreshold>
+                <queueSize>512</queueSize>
+                <!-- 注意这里一定要放到springProfile里, 否则在你本机执行的时候还是会去找相应的文件 -->
+                <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
                     <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
                         <pattern>${PATTERN}</pattern>
                     </encoder>

@@ -38,7 +38,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements IUserServi
     public void setDefaults(User record) {
         String userId = record.getUserId();
         if(StringUtils.isEmpty(userId)){
-            userId = IdWorker.getIdString();
+            userId = IdWorker.getUUID();
             record.setUserId(userId);
         }
         String password = record.getPassword();

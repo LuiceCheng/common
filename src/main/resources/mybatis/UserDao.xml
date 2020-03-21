@@ -3,12 +3,17 @@
 <mapper namespace="com.example.common.dao.IUserDao">
     <resultMap id="BaseResultMap" type="com.example.common.model.User">
         <!--
-          警告 -
-          此语句为代码生成器自动生成,请勿更改
-        -->
+      警告 -
+      此语句为代码生成器自动生成,请勿更改
+    -->
         <result column="user_id" jdbcType="CHAR" property="userId" />
         <result column="user_name" jdbcType="VARCHAR" property="userName" />
         <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="age" jdbcType="INTEGER" property="age" />
+        <result column="create_at" jdbcType="TIMESTAMP" property="createAt" />
+        <result column="create_by" jdbcType="CHAR" property="createBy" />
+        <result column="update_at" jdbcType="TIMESTAMP" property="updateAt" />
+        <result column="update_by" jdbcType="CHAR" property="updateBy" />
     </resultMap>
     <sql id="Example_Where_Clause">
         <!--
@@ -25,6 +30,21 @@
             </if>
             <if test = "password != null and password != ''">
                 and password = #{password,jdbcType=VARCHAR}
+            </if>
+            <if test = "age != null">
+                and age = #{age,jdbcType=INTEGER}
+            </if>
+            <if test = "createAt != null">
+                and create_at = #{createAt,jdbcType=TIMESTAMP}
+            </if>
+            <if test = "createBy != null and createBy != ''">
+                and create_by = #{createBy,jdbcType=CHAR}
+            </if>
+            <if test = "updateAt != null">
+                and update_at = #{updateAt,jdbcType=TIMESTAMP}
+            </if>
+            <if test = "updateBy != null and updateBy != ''">
+                and update_by = #{updateBy,jdbcType=CHAR}
             </if>
         </where>
     </sql>
@@ -45,6 +65,21 @@
             <if test="record.password != null and record.password != ''">
                 and password = #{record.password,jdbcType=VARCHAR}
             </if>
+            <if test = "record.age != null">
+                and age = #{record.age,jdbcType=INTEGER}
+            </if>
+            <if test = "record.createAt != null">
+                and create_at = #{record.createAt,jdbcType=TIMESTAMP}
+            </if>
+            <if test="record.createBy != null and record.createBy != ''">
+                and create_by = #{record.createBy,jdbcType=CHAR}
+            </if>
+            <if test = "record.updateAt != null">
+                and update_at = #{record.updateAt,jdbcType=TIMESTAMP}
+            </if>
+            <if test="record.updateBy != null and record.updateBy != ''">
+                and update_by = #{record.updateBy,jdbcType=CHAR}
+            </if>
         </where>
     </sql>
     <sql id="Base_Column_List">
@@ -54,7 +89,12 @@
         -->
         user_id,
         user_name,
-        password    </sql>
+        password,
+        age,
+        create_at,
+        create_by,
+        update_at,
+        update_by    </sql>
 
     <select id="selectByExample" resultMap="BaseResultMap">
         <!--
@@ -66,7 +106,7 @@
             distinct
         </if>
         <include refid="Base_Column_List" />
-            from user
+        from user
         <include refid="Prefixed_Example_Where_Clause" />
     </select>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -99,27 +139,37 @@
     </delete>
 
     <insert id="insert" parameterType="com.example.common.model.User">
-      <!--
-        警告 -
-        此语句为代码生成器自动生成,请勿更改
-      -->
+        <!--
+          警告 -
+          此语句为代码生成器自动生成,请勿更改
+        -->
         insert into user(
         user_id,
         user_name,
-        password)
+        password,
+        age,
+        create_at,
+        create_by,
+        update_at,
+        update_by)
         values
         (#{userId,jdbcType=CHAR},
         #{userName,jdbcType=VARCHAR},
-        #{password,jdbcType=VARCHAR})
+        #{password,jdbcType=VARCHAR},
+        #{age,jdbcType=INTEGER},
+        #{createAt,jdbcType=TIMESTAMP},
+        #{createBy,jdbcType=CHAR},
+        #{updateAt,jdbcType=TIMESTAMP},
+        #{updateBy,jdbcType=CHAR})
     </insert>
 
     <insert id="insertSelective" parameterType="com.example.common.model.User">
-      <!--
-        警告 -
-        此语句为代码生成器自动生成,请勿更改
-      -->
+        <!--
+          警告 -
+          此语句为代码生成器自动生成,请勿更改
+        -->
         insert into user
-        <trim> prefix="(" suffix=")" suffixOverrides=",">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="userId != null and userId != ''">
                 user_id,
             </if>
@@ -127,25 +177,55 @@
                 user_name,
             </if>
             <if test="password != null and password != ''">
-                password            </if>
+                password,
+            </if>
+            <if test = "age != null">
+                age,
+            </if>
+            <if test = "createAt != null">
+                create_at,
+            </if>
+            <if test="createBy != null and createBy != ''">
+                create_by,
+            </if>
+            <if test = "updateAt != null">
+                update_at,
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                update_by            </if>
         </trim>
-        <trim> prefix="(" suffix=")" suffixOverrides=",">
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userId != null and userId != ''">
-                #{user_id,jdbcType=${$column.mybatisJdbcType}},
+                #{userId,jdbcType=CHAR},
             </if>
             <if test="userName != null and userName != ''">
-                #{user_name,jdbcType=${$column.mybatisJdbcType}},
+                #{userName,jdbcType=VARCHAR},
             </if>
             <if test="password != null and password != ''">
-                #{password,jdbcType=${$column.mybatisJdbcType}}            </if>
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test = "age != null">
+                #{age,jdbcType=INTEGER},
+            </if>
+            <if test = "createAt != null">
+                #{createAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null and createBy != ''">
+                #{createBy,jdbcType=CHAR},
+            </if>
+            <if test = "updateAt != null">
+                #{updateAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                #{updateBy,jdbcType=CHAR}            </if>
         </trim>
     </insert>
 
     <select id="countByExample" parameterType="com.example.common.model.User" resultType="java.lang.Long">
-      <!--
-        警告 -
-        此语句为代码生成器自动生成,请勿更改
-      -->
+        <!--
+          警告 -
+          此语句为代码生成器自动生成,请勿更改
+        -->
         select count(1) from user
         <include refid="Example_Where_Clause" />
     </select>
@@ -166,6 +246,21 @@
             <if test="record.password != null and record.password != ''">
                 password = #{record.password,jdbcType=VARCHAR}
             </if>
+            <if test = "record.age != null">
+                age = #{record.age,jdbcType=INTEGER}
+            </if>
+            <if test = "record.createAt != null">
+                create_at = #{record.createAt,jdbcType=TIMESTAMP}
+            </if>
+            <if test="record.createBy != null and record.createBy != ''">
+                create_by = #{record.createBy,jdbcType=CHAR}
+            </if>
+            <if test = "record.updateAt != null">
+                update_at = #{record.updateAt,jdbcType=TIMESTAMP}
+            </if>
+            <if test="record.updateBy != null and record.updateBy != ''">
+                update_by = #{record.updateBy,jdbcType=CHAR}
+            </if>
         </set>
         <include refid="Prefixed_Example_Where_Clause" />
     </update>
@@ -177,7 +272,12 @@
         update user set
         user_id = #{record.userId,jdbcType=CHAR},
         user_name = #{record.userName,jdbcType=VARCHAR},
-        password = #{record.password,jdbcType=VARCHAR}
+        password = #{record.password,jdbcType=VARCHAR},
+        age = #{record.age,jdbcType=INTEGER},
+        create_at = #{record.createAt,jdbcType=TIMESTAMP},
+        create_by = #{record.createBy,jdbcType=CHAR},
+        update_at = #{record.updateAt,jdbcType=TIMESTAMP},
+        update_by = #{record.updateBy,jdbcType=CHAR}
         <include refid="Prefixed_Example_Where_Clause" />
     </update>
 
@@ -192,7 +292,22 @@
                 user_name = #{userName,jdbcType=VARCHAR},
             </if>
             <if test="password != null and password != ''">
-                password = #{password,jdbcType=VARCHAR}            </if>
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test = "age != null">
+                age = #{age,jdbcType=INTEGER},
+            </if>
+            <if test = "createAt != null">
+                create_at = #{createAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null and createBy != ''">
+                create_by = #{createBy,jdbcType=CHAR},
+            </if>
+            <if test = "updateAt != null">
+                update_at = #{updateAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                update_by = #{updateBy,jdbcType=CHAR}            </if>
 
         </set>
         where
@@ -208,7 +323,12 @@
         update user
         set
         user_name = #{userName,jdbcType=VARCHAR},
-        password = #{password,jdbcType=VARCHAR}
+        password = #{password,jdbcType=VARCHAR},
+        age = #{age,jdbcType=INTEGER},
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+        create_by = #{createBy,jdbcType=CHAR},
+        update_at = #{updateAt,jdbcType=TIMESTAMP},
+        update_by = #{updateBy,jdbcType=CHAR}
         where
         user_id = #{userId,jdbcType=VARCHAR}
     </update>
@@ -221,14 +341,24 @@
         insert into user(
         user_id,
         user_name,
-        password)
+        password,
+        age,
+        create_at,
+        create_by,
+        update_at,
+        update_by)
         values
         <foreach collection="list" index="index" item="item" separator=",">
-        (
-        #{item.userId,jdbcType=CHAR},
-        #{item.userName,jdbcType=VARCHAR},
-        #{item.password,jdbcType=VARCHAR}
-        )
+            (
+            #{item.userId,jdbcType=CHAR},
+            #{item.userName,jdbcType=VARCHAR},
+            #{item.password,jdbcType=VARCHAR},
+            #{item.age,jdbcType=INTEGER},
+            #{item.createAt,jdbcType=TIMESTAMP},
+            #{item.createBy,jdbcType=CHAR},
+            #{item.updateAt,jdbcType=TIMESTAMP},
+            #{item.updateBy,jdbcType=CHAR}
+            )
         </foreach>
     </insert>
 
@@ -242,13 +372,29 @@
             insert into user
             <set>
                 <if test="item.userId != null and item.userId != ''">
-                    user_id = #{userId,jdbcType=CHAR},
+                    user_id = #{item.userId,jdbcType=CHAR},
                 </if>
                 <if test="item.userName != null and item.userName != ''">
-                    user_name = #{userName,jdbcType=VARCHAR},
+                    user_name = #{item.userName,jdbcType=VARCHAR},
                 </if>
                 <if test="item.password != null and item.password != ''">
-                    password = #{password,jdbcType=VARCHAR}                </if>
+                    password = #{item.password,jdbcType=VARCHAR},
+                </if>
+                <if test = "item.age != null">
+                    age = #{item.age,jdbcType=INTEGER},
+                </if>
+                <if test = "item.createAt != null">
+                    create_at = #{item.createAt,jdbcType=TIMESTAMP},
+                </if>
+                <if test="item.createBy != null and item.createBy != ''">
+                    create_by = #{item.createBy,jdbcType=CHAR},
+                </if>
+                <if test = "item.updateAt != null">
+                    update_at = #{item.updateAt,jdbcType=TIMESTAMP},
+                </if>
+                <if test="item.updateBy != null and item.updateBy != ''">
+                    update_by = #{item.updateBy,jdbcType=CHAR},
+                </if>
             </set>
         </foreach>
     </insert>
@@ -263,7 +409,7 @@
         user_id
         in
         <foreach close=")" collection="items" index="index" item="item" open="(" separator=",">
-          #{item}
+            #{item}
         </foreach>
     </delete>
 
@@ -276,7 +422,12 @@
             update user
             set
             user_name = #{item.userName,jdbcType=VARCHAR},
-            password = #{item.password,jdbcType=VARCHAR}
+            password = #{item.password,jdbcType=VARCHAR},
+            age = #{item.age,jdbcType=INTEGER},
+            create_at = #{item.createAt,jdbcType=TIMESTAMP},
+            create_by = #{item.createBy,jdbcType=CHAR},
+            update_at = #{item.updateAt,jdbcType=TIMESTAMP},
+            update_by = #{item.updateBy,jdbcType=CHAR}
             where
             user_id = #{item.userId,jdbcType=CHAR}
         </foreach>
@@ -295,22 +446,42 @@
 
                 </if>
                 <if test="item.password != null and item.password != ''">
-                    password = #{item.password,jdbcType=VARCHAR}
+                    password = #{item.password,jdbcType=VARCHAR},
+
                 </if>
-              </set>
+                <if test = "item.age != null">
+                    age = #{item.age,jdbcType=INTEGER},
+
+                </if>
+                <if test = "item.createAt != null">
+                    create_at = #{item.createAt,jdbcType=TIMESTAMP},
+
+                </if>
+                <if test="item.createBy != null and item.createBy != ''">
+                    create_by = #{item.createBy,jdbcType=CHAR},
+
+                </if>
+                <if test = "item.updateAt != null">
+                    update_at = #{item.updateAt,jdbcType=TIMESTAMP},
+
+                </if>
+                <if test="item.updateBy != null and item.updateBy != ''">
+                    update_by = #{item.updateBy,jdbcType=CHAR}
+                </if>
+            </set>
             where
             user_id = #{item.userId,jdbcType=CHAR}
         </foreach>
     </update>
 
-    <select id="selectByExampleByPager" resultMap="BaseResultMap">
-        <!--
-            警告 -
-            此语句为代码生成器自动生成,请勿更改
-        -->
-        select * from user
-        <include refid="Prefixed_Example_Where_Clause" />
-    </select>
+    <!--<select id="selectByExampleByPager" resultMap="BaseResultMap">-->
+        <!--&lt;!&ndash;-->
+            <!--警告 - -->
+            <!--此语句为代码生成器自动生成,请勿更改-->
+        <!--&ndash;&gt;-->
+        <!--select * from user-->
+        <!--<include refid="Prefixed_Example_Where_Clause" />-->
+    <!--</select>-->
     <select id="fuzzySearch" resultMap="BaseResultMap">
         <!--
             警告 -
@@ -337,6 +508,21 @@
             <if test="password != null and password != ''">
                 and password like concat('%',#{password,jdbcType=VARCHAR}, '%')
             </if>
+            <if test = "age != null">
+                and age = #{age,jdbcType=INTEGER}
+            </if>
+            <if test = "createAt != null">
+                and create_at = #{createAt,jdbcType=TIMESTAMP}
+            </if>
+            <if test="createBy != null and createBy != ''">
+                and create_by like concat('%',#{createBy,jdbcType=CHAR}, '%')
+            </if>
+            <if test = "updateAt != null">
+                and update_at = #{updateAt,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                and update_by like concat('%',#{updateBy,jdbcType=CHAR}, '%')
+            </if>
         </where>
     </sql>
 
@@ -358,13 +544,28 @@
         -->
         <where>
             <if test="item.userId != null and item.userId != ''">
-                  and user_id like concat('%',#{item.userId,jdbcType=CHAR}, '%')
+                and user_id like concat('%',#{item.userId,jdbcType=CHAR}, '%')
             </if>
             <if test="item.userName != null and item.userName != ''">
-                  and user_name like concat('%',#{item.userName,jdbcType=VARCHAR}, '%')
+                and user_name like concat('%',#{item.userName,jdbcType=VARCHAR}, '%')
             </if>
             <if test="item.password != null and item.password != ''">
-                  and password like concat('%',#{item.password,jdbcType=VARCHAR}, '%')
+                and password like concat('%',#{item.password,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test ="item.age != null">
+                and age = #{item.age,jdbcType=INTEGER}
+            </if>
+            <if test ="item.createAt != null">
+                and create_at = #{item.createAt,jdbcType=TIMESTAMP}
+            </if>
+            <if test="item.createBy != null and item.createBy != ''">
+                and create_by like concat('%',#{item.createBy,jdbcType=CHAR}, '%')
+            </if>
+            <if test ="item.updateAt != null">
+                and update_at = #{item.updateAt,jdbcType=TIMESTAMP}
+            </if>
+            <if test="item.updateBy != null and item.updateBy != ''">
+                and update_by like concat('%',#{item.updateBy,jdbcType=CHAR}, '%')
             </if>
         </where>
     </sql>

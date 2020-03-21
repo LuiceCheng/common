@@ -1,7 +1,5 @@
 package com.example.common.dao;
 
-import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
-import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -14,7 +12,7 @@ import java.util.List;
  * @Description:
  */
 public interface IBaseDao<T> {
-    Long countByExample(T record);
+    Long countByExample(@Param("record") T record);
 
     int insert(T record);
 
@@ -46,9 +44,7 @@ public interface IBaseDao<T> {
 
     List<T> selectByExample(@Param("record") T record, @Param("distinct") boolean distinct);
 
-    PageList<T> selectByExampleByPager(@Param("example") T record, @Param("pageBounds") PageBounds pageBounds);
-
     T fuzzySearch(T record);
 
-    PageList<T> fuzzySearchByPager(@Param("item") T record, @Param("pageBounds") PageBounds pageBounds);
+    List<T> fuzzySearchByPager(@Param("item") T record);
 }

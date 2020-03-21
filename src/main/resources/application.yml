@@ -23,3 +23,12 @@ ums:
     spCode: 251743
     loginName: ed_cjdq
     password: cjdq2019
+
+
+
+# 分页配置
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql

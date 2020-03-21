@@ -2,11 +2,12 @@ package com.example.common.controller;
 
 import com.example.common.fastDFS.client.FileResponseData;
 import com.example.common.fastDFS.services.FastDFSService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -21,7 +22,8 @@ import java.util.List;
  * @author:cxs
  * @date: 2019/4/23 11:37
  */
-@Controller
+@Api(value = "fastdfs-测试")
+@RestController
 @RequestMapping("fastdfs")
 public class TestFastDFSController {
 
@@ -34,7 +36,8 @@ public class TestFastDFSController {
    * @param filePath
    * @param response
    */
-  @RequestMapping("download")
+  @ApiOperation(value = "下载测试", tags = "fastDFS测试")
+  @GetMapping("download")
   @ResponseBody
   public void downloadFile(String filePath, HttpServletResponse response) {
     try {
@@ -49,7 +52,8 @@ public class TestFastDFSController {
    *
    * @param request
    */
-  @RequestMapping(value = "/upload/file/sample")
+  @ApiOperation(value = "上传测试", tags = "fastDFS测试")
+  @PostMapping(value = "/upload/file/sample")
   @ResponseBody
   public FileResponseData uploadFileSample(HttpServletRequest request) {
     List<MultipartFile> files = new ArrayList<>();

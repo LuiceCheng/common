@@ -4,17 +4,18 @@ import com.example.common.app.ContextUtil;
 import com.example.common.app.user.AppUserDetails;
 import com.example.common.entity.GlobalConstants;
 import com.example.common.entity.Msg;
+import com.example.common.entity.PageBounds;
 import com.example.common.enums.EnError;
 import com.example.common.services.IBaseService;
-import com.github.miemiedev.mybatis.paginator.domain.Order;
-import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
-import com.github.miemiedev.mybatis.paginator.domain.PageList;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,6 +24,7 @@ import java.util.List;
  * @Date: 2019/3/14 21:02
  * @Description:
  */
+@Transactional
 public abstract class BaseServiceImpl<T> implements IBaseService<T> {
 
     private static final Logger logger = LoggerFactory.getLogger(BaseServiceImpl.class);
@@ -66,34 +68,53 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
 
     @Override
     public Msg<List<T>> batchInsert(List<T> records) {
+        Msg result = new Msg();
+        if (CollectionUtils.isEmpty(records)){
+            result.setResult(EnError.INSERT_NONE);
+            return result;
+        }
+        for (T record : records) {
+            setDefaults(record);
+            setCreateInfo(record);
+        }
+
         int insertLength = records.size();
         int i = 0;
         while (insertLength > GlobalConstants.BATCH_INSERT_SIZE) {
-            getRepositoryDao().batchInsert(records.subList(i, i + insertLength));
+            getRepositoryDao().batchInsert(records.subList(i, i + GlobalConstants.BATCH_INSERT_SIZE));
             i = i + GlobalConstants.BATCH_INSERT_SIZE;
             insertLength = insertLength - GlobalConstants.BATCH_INSERT_SIZE;
         }
         if (insertLength > 0) {
             getRepositoryDao().batchInsert(records.subList(i, i + insertLength));
         }
-        Msg result = new Msg();
+
         result.setData(records);
         return result;
     }
 
     @Override
     public Msg<List<T>> batchInsertSelective(List<T> records) {
+        Msg result = new Msg();
+        if (CollectionUtils.isEmpty(records)){
+            result.setResult(EnError.INSERT_NONE);
+            return result;
+        }
+        for (T record : records) {
+            setDefaults(record);
+            setCreateInfo(record);
+        }
         int insertLength = records.size();
         int i = 0;
         while (insertLength > GlobalConstants.BATCH_INSERT_SIZE) {
-            getRepositoryDao().batchInsertSelective(records.subList(i, i + insertLength));
+            getRepositoryDao().batchInsertSelective(records.subList(i, GlobalConstants.BATCH_INSERT_SIZE));
             i = i + GlobalConstants.BATCH_INSERT_SIZE;
             insertLength = insertLength - GlobalConstants.BATCH_INSERT_SIZE;
         }
         if (insertLength > 0) {
             getRepositoryDao().batchInsertSelective(records.subList(i, i + insertLength));
         }
-        Msg result = new Msg();
+
         result.setData(records);
         return result;
     }
@@ -253,7 +274,7 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
     public Msg<List<T>> selectByExample(T record, boolean distinct) {
         Msg<List<T>> msg = new Msg<>();
         List<T> result = getRepositoryDao().selectByExample(record, distinct);
-        if (null == result || result.isEmpty()) {
+        if (CollectionUtils.isEmpty(result)) {
             msg.setResult(EnError.NO_MATCH);
             return msg;
         }
@@ -275,39 +296,15 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
     }
 
     @Override
-    public Msg<List<T>> selectAllByExample(T record) {
-        Msg<List<T>> msg = new Msg<>();
-        Msg<PageList<T>> pageListMsg = new Msg<>();
-        List<T> list = new ArrayList<>();
-        PageBounds pageBounds = new PageBounds(1, 5000);
-
-        while (0 == pageListMsg.getCode()) {
-            pageListMsg = selectByExampleByPager(record, pageBounds);
-            if (0 == pageListMsg.getCode()) {
-                list.addAll(pageListMsg.getData());
-            }
-
-            pageBounds.setPage(pageBounds.getPage() + 1);
-        }
-
-        if (list.isEmpty()) {
-            return msg;
-        }
-
-        msg.setData(list);
-        return msg;
-    }
-
-    @Override
-    public Msg<PageList<T>> selectByExampleByPager(T record, PageBounds pageBounds) {
-        Msg<PageList<T>> msg = new Msg<>();
-        PageList<T> result = getRepositoryDao().selectByExampleByPager(record, pageBounds);
-        if (result.isEmpty()) {
+    public Msg<PageInfo<T>> selectByPager(T record, PageBounds pageBounds) {
+        Msg<PageInfo<T>> msg = new Msg<>();
+        PageHelper.startPage(pageBounds.getPage(), pageBounds.getLimit());
+        List<T> result = getRepositoryDao().selectByExample(record, false);
+        if(CollectionUtils.isEmpty(result)){
             msg.setResult(EnError.NO_MATCH);
-            return msg;
         }
-
-        msg.setData(result);
+        PageInfo<T> pageInfo = new PageInfo<>(result);
+        msg.setData(pageInfo);
         return msg;
     }
 
@@ -325,20 +322,15 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
     }
 
     @Override
-    public Msg<PageList<T>> fuzzySearchByPager(T record, PageBounds pageBounds) {
-        Msg<PageList<T>> msg = new Msg<>();
-        if (null == pageBounds.getOrders() && pageBounds.getOrders().isEmpty()) {
-            List<Order> orders = new ArrayList<>();
-            orders.add(new Order("createAt", Order.Direction.DESC, ""));
-            pageBounds.setOrders(orders);
-        }
-        PageList<T> result = getRepositoryDao().fuzzySearchByPager(record, pageBounds);
-        if (result.isEmpty()) {
+    public Msg<PageInfo<T>> fuzzySearchByPager(T record, PageBounds pageBounds) {
+        PageHelper.startPage(pageBounds.getPage(), pageBounds.getLimit());
+        List<T> result = getRepositoryDao().fuzzySearchByPager(record);
+        PageInfo<T> pageInfo = new PageInfo<>(result);
+        Msg<PageInfo<T>> msg = new Msg<>();
+        if(null == result){
             msg.setResult(EnError.NO_MATCH);
-            return msg;
         }
-
-        msg.setData(result);
+        msg.setData(pageInfo);
         return msg;
     }
 

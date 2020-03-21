@@ -110,11 +110,22 @@
             <version>1.2.24</version>
         </dependency>
 
+        <!--<dependency>-->
+            <!--<groupId>com.github.miemiedev</groupId>-->
+            <!--<artifactId>mybatis-paginator</artifactId>-->
+            <!--<version>1.2.17</version>-->
+        <!--</dependency>-->
+        <!-- 分页 -->
         <dependency>
-            <groupId>com.github.miemiedev</groupId>
-            <artifactId>mybatis-paginator</artifactId>
-            <version>1.2.17</version>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.2.7</version>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.github.pagehelper</groupId>-->
+            <!--<artifactId>pagehelper</artifactId>-->
+            <!--<version>5.0.4</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>org.springframework.security</groupId>

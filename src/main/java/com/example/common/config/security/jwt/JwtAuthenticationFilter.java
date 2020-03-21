@@ -55,7 +55,6 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
             logger.error("系统异常 ", e);
         }
 
-
         chain.doFilter(request, response);
     }
 }

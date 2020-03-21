@@ -6,6 +6,7 @@ import com.example.common.enums.EnError;
 import com.example.common.services.ISysErrorLogService;
 import com.example.common.utils.threadPool.ThreadPoolExecutorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author:cxs
  * @date: 2019/12/19 17:11
  */
+@Profile(value = "prod")
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
