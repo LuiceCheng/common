@@ -136,33 +136,6 @@
         <include refid="Example_Where_Clause" />
     </select>
 
-    <update id="updateByExampleSelective">
-        <!--
-            警告 -
-            此语句为代码生成器自动生成,请勿更改
-        -->
-        update resource
-        <set>
-            <if test="record.resourceId != null and record.resourceId != ''">
-                resource_id = #{record.resourceId,jdbcType=CHAR}
-            </if>
-            <if test="record.resourceName != null and record.resourceName != ''">
-                resource_name = #{record.resourceName,jdbcType=VARCHAR}
-            </if>
-        </set>
-        <include refid="Prefixed_Example_Where_Clause" />
-    </update>
-    <update id="updateByExample">
-        <!--
-            警告 -
-            此语句为代码生成器自动生成,请勿更改
-        -->
-        update resource set
-        resource_id = #{record.resourceId,jdbcType=CHAR},
-        resource_name = #{record.resourceName,jdbcType=VARCHAR}
-        <include refid="Prefixed_Example_Where_Clause" />
-    </update>
-
     <update id="updateByPrimaryKeySelective" parameterType="com.example.common.model.Resource">
         <!--
             警告 -
@@ -273,14 +246,6 @@
         </foreach>
     </update>
 
-    <select id="selectByExampleByPager" resultMap="BaseResultMap">
-        <!--
-            警告 -
-            此语句为代码生成器自动生成,请勿更改
-        -->
-        select * from resource
-        <include refid="Prefixed_Example_Where_Clause" />
-    </select>
     <select id="fuzzySearch" resultMap="BaseResultMap">
         <!--
             警告 -

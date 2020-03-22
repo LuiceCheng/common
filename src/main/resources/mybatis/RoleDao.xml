@@ -134,33 +134,6 @@
         <include refid="Example_Where_Clause" />
     </select>
 
-    <update id="updateByExampleSelective">
-        <!--
-            警告 -
-            此语句为代码生成器自动生成,请勿更改
-        -->
-        update role
-        <set>
-            <if test="record.roleId != null and record.roleId != ''">
-                role_id = #{record.roleId,jdbcType=CHAR}
-            </if>
-            <if test="record.roleName != null and record.roleName != ''">
-                role_name = #{record.roleName,jdbcType=VARCHAR}
-            </if>
-        </set>
-        <include refid="Prefixed_Example_Where_Clause" />
-    </update>
-    <update id="updateByExample">
-        <!--
-            警告 -
-            此语句为代码生成器自动生成,请勿更改
-        -->
-        update role set
-        role_id = #{record.roleId,jdbcType=CHAR},
-        role_name = #{record.roleName,jdbcType=VARCHAR}
-        <include refid="Prefixed_Example_Where_Clause" />
-    </update>
-
     <update id="updateByPrimaryKeySelective" parameterType="com.example.common.model.Role">
         <!--
             警告 -
@@ -269,14 +242,6 @@
         </foreach>
     </update>
 
-    <select id="selectByExampleByPager" resultMap="BaseResultMap">
-        <!--
-            警告 -
-            此语句为代码生成器自动生成,请勿更改
-        -->
-        select * from role
-        <include refid="Prefixed_Example_Where_Clause" />
-    </select>
     <select id="fuzzySearch" resultMap="BaseResultMap">
         <!--
             警告 -

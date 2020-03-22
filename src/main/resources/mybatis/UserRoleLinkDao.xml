@@ -150,37 +150,6 @@
         <include refid="Example_Where_Clause" />
     </select>
 
-    <update id="updateByExampleSelective">
-        <!--
-            警告 -
-            此语句为代码生成器自动生成,请勿更改
-        -->
-        update user_role_link
-        <set>
-            <if test="record.id != null and record.id != ''">
-                id = #{record.id,jdbcType=CHAR}
-            </if>
-            <if test="record.userId != null and record.userId != ''">
-                user_id = #{record.userId,jdbcType=CHAR}
-            </if>
-            <if test="record.roleId != null and record.roleId != ''">
-                role_id = #{record.roleId,jdbcType=CHAR}
-            </if>
-        </set>
-        <include refid="Prefixed_Example_Where_Clause" />
-    </update>
-    <update id="updateByExample">
-        <!--
-            警告 -
-            此语句为代码生成器自动生成,请勿更改
-        -->
-        update user_role_link set
-        id = #{record.id,jdbcType=CHAR},
-        user_id = #{record.userId,jdbcType=CHAR},
-        role_id = #{record.roleId,jdbcType=CHAR}
-        <include refid="Prefixed_Example_Where_Clause" />
-    </update>
-
     <update id="updateByPrimaryKeySelective" parameterType="com.example.common.model.UserRoleLink">
         <!--
             警告 -
@@ -303,14 +272,6 @@
         </foreach>
     </update>
 
-    <select id="selectByExampleByPager" resultMap="BaseResultMap">
-        <!--
-            警告 -
-            此语句为代码生成器自动生成,请勿更改
-        -->
-        select * from user_role_link
-        <include refid="Prefixed_Example_Where_Clause" />
-    </select>
     <select id="fuzzySearch" resultMap="BaseResultMap">
         <!--
             警告 -

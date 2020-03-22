@@ -1,6 +1,9 @@
 package com.example.common.services;
 
+import com.example.common.entity.Msg;
 import com.example.common.model.User;
+
+import java.util.List;
 
 public interface IUserService extends IBaseService<User>{
 
@@ -19,4 +22,11 @@ public interface IUserService extends IBaseService<User>{
      * @param newPwd 新密码
      */
     void modifyPwdWidthVcodeToken(String vcodeToken, String phone,String newPwd);
+
+    /**
+     * 获取登录用户
+     * @param user
+     * @return
+     */
+    Msg<List<User>>  getUserByName(User user);
 }

@@ -13,6 +13,7 @@ import com.example.common.sms.key.SmsCacheKey;
 import com.example.common.utils.CommonUtil;
 import com.example.common.utils.EncryptUtil;
 import com.example.common.utils.IdWorker;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -55,12 +56,12 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements IUserServi
 
     @Override
     public String getPrimaryKeyValue(User record) {
-        return null;
+        return record.getUserId();
     }
 
     @Override
     public void emptyPrimaryKeyValue(User record) {
-
+        record.setUserId("");
     }
 
     @Override
@@ -121,6 +122,18 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements IUserServi
 //        updateUser.setPassword(newPwd);
 //        updateUser.setSalt(salt);
 //        updateUser.updateById();
-        this.updateByExample(updateUser);
+        this.updateByPrimaryKey(updateUser);
+    }
+
+    @Override
+    public Msg<List<User>> getUserByName(User user) {
+        Msg<List<User>> msg = new Msg<>();
+        List<User> userByName = userDao.getUserByName(user);
+        if(CollectionUtils.isEmpty(userByName)){
+            msg.setResult(EnError.NO_MATCH);
+            return msg;
+        }
+        msg.setData(userByName);
+        return msg;
     }
 }

@@ -13,11 +13,14 @@ public class PageBounds extends RowBounds implements Serializable {
     @ApiModelProperty(value = "页号")
     protected int page = NO_PAGE;
     @ApiModelProperty(value = "分页大小")
-    protected int limit = Integer.MAX_VALUE;
+    protected int pageSize = Integer.MAX_VALUE;
+
+    public PageBounds() {
+    }
 
     public PageBounds(RowBounds rowBounds) {
             this.page = (rowBounds.getOffset()/rowBounds.getLimit())+1;
-            this.limit = rowBounds.getLimit();
+            this.pageSize = rowBounds.getLimit();
     }
 
     /**
@@ -25,12 +28,12 @@ public class PageBounds extends RowBounds implements Serializable {
      * @param limit
      */
     public PageBounds(int limit) {
-        this.limit = limit;
+        this.pageSize = limit;
     }
 
     public PageBounds(int page, int limit) {
         this.page = page;
-        this.limit = limit;
+        this.pageSize = limit;
     }
 
 
@@ -42,12 +45,11 @@ public class PageBounds extends RowBounds implements Serializable {
         this.page = page;
     }
 
-    public int getLimit() {
-        return limit;
+    public int getPageSize() {
+        return pageSize;
     }
 
-    public void setLimit(int limit) {
-        this.limit = limit;
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
     }
-
 }

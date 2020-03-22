@@ -101,4 +101,78 @@ public class UserController {
         Msg<List<User>> listMsg = userService.batchInsertSelective(userList);
         return listMsg;
     }
+
+    @ApiOperation(value = "deleteByPrimaryKey", tags = "用户")
+    @GetMapping("deleteByPrimaryKey")
+    @ApiImplicitParam(value = "userId", name = "userId", required = true, paramType = "query")
+    public Msg deleteByPrimaryKey(@RequestParam(value = "userId") String userId){
+        Msg<Boolean> booleanMsg = userService.deleteByPrimaryKey(userId);
+        return booleanMsg;
+    }
+
+    @ApiOperation(value = "deleteByExample", tags = "用户")
+    @DeleteMapping("deleteByExample")
+    public Msg deleteByExample(@RequestBody User user){
+        Msg<Integer> integerMsg = userService.deleteByExample(user);
+        return integerMsg;
+    }
+
+    @ApiOperation(value = "batchDeleteByPrimaryKey", tags = "用户")
+    @PutMapping("batchDeleteByPrimaryKey")
+    public Msg batchDeleteByPrimaryKey(@RequestParam(value = "keys") String[] keys) {
+        Msg<Integer> integerMsg = userService.batchDeleteByPrimaryKey(keys);
+        return integerMsg;
+    }
+
+    @ApiOperation(value = "updateByPrimaryKey", tags = "用户")
+    @PostMapping("updateByPrimaryKey")
+    public Msg updateByPrimaryKey(@RequestBody User user) {
+        Msg<User> userMsg = userService.updateByPrimaryKey(user);
+        return userMsg;
+    }
+
+    @ApiOperation(value = "updateByPrimaryKeySelective", tags = "用户")
+    @PostMapping("updateByPrimaryKeySelective")
+    public Msg updateByPrimaryKeySelective(@RequestBody User user) {
+        Msg<User> userMsg = userService.updateByPrimaryKeySelective(user);
+        return userMsg;
+    }
+
+    @ApiOperation(value = "batchUpdateByPrimaryKey", tags = "用户")
+    @PostMapping("batchUpdateByPrimaryKey")
+    public Msg batchUpdateByPrimaryKey(@RequestBody List<User> user) {
+        Msg<List<User>> listMsg = userService.batchUpdateByPrimaryKey(user);
+        return listMsg;
+    }
+
+    @ApiOperation(value = "batchUpdateByPrimaryKeySelective", tags = "用户")
+    @PostMapping("batchUpdateByPrimaryKeySelective")
+    public Msg batchUpdateByPrimaryKeySelective(@RequestBody List<User> user) {
+        Msg<List<User>> listMsg = userService.batchUpdateByPrimaryKeySelective(user);
+        return listMsg;
+    }
+
+    @ApiOperation(value = "selectByPrimaryKey", tags = "用户")
+    @ApiImplicitParam(value = "userId", name = "userId", dataType = "String", required = true, paramType = "query")
+    @GetMapping("selectByPrimaryKey")
+    public Msg selectByPrimaryKey(String userId) {
+        Msg<User> userMsg = userService.selectByPrimaryKey(userId);
+        return userMsg;
+    }
+
+    @ApiOperation(value = "fuzzySearch", tags = "用户")
+    @GetMapping("fuzzySearch")
+    public Msg fuzzySearch(@ModelAttribute User user) {
+        Msg<User> userMsg = userService.fuzzySearch(user);
+        return userMsg;
+    }
+
+    @ApiOperation(value = "fuzzySearchByPager", tags = "用户")
+    @GetMapping("fuzzySearchByPager")
+    public Msg fuzzySearchByPager(@ModelAttribute User user, @ModelAttribute PageBounds pageBounds) {
+        Msg<PageInfo<User>> pageInfoMsg = userService.fuzzySearchByPager(user, pageBounds);
+        return pageInfoMsg;
+    }
+
+
 }

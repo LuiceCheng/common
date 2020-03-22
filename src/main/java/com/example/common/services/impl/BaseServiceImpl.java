@@ -190,40 +190,6 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
     }
 
     @Override
-    public Msg<T> updateByExample(T record) {
-        Msg<T> msg = new Msg<>();
-        setDefaults(record);
-        setUpdateInfo(record);
-        int result = getRepositoryDao().updateByExample(record);
-        if (0 == result) {
-            msg.setResult(EnError.UPDATE_NONE);
-            return msg;
-        }
-
-        // 重新获取数据
-        T dbRecord = getRepositoryDao().selectByPrimaryKey(getPrimaryKeyValue(record));
-        msg.setData(dbRecord);
-        return msg;
-    }
-
-    @Override
-    public Msg<T> updateByExampleSelective(T example, T record) {
-        Msg<T> msg = new Msg<>();
-        setDefaults(record);
-        setUpdateInfo(record);
-        int result = getRepositoryDao().updateByExampleSelective(example, record);
-        if (0 == result) {
-            msg.setResult(EnError.UPDATE_NONE);
-            return msg;
-        }
-
-        // 重新获取数据
-        T dbRecord = getRepositoryDao().selectByPrimaryKey(getPrimaryKeyValue(record));
-        msg.setData(dbRecord);
-        return msg;
-    }
-
-    @Override
     public Msg<List<T>> batchUpdateByPrimaryKey(List<T> records) {
         Msg<List<T>> msg = new Msg<>();
         for (T record : records) {
@@ -298,7 +264,7 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
     @Override
     public Msg<PageInfo<T>> selectByPager(T record, PageBounds pageBounds) {
         Msg<PageInfo<T>> msg = new Msg<>();
-        PageHelper.startPage(pageBounds.getPage(), pageBounds.getLimit());
+        PageHelper.startPage(pageBounds.getPage(), pageBounds.getPageSize());
         List<T> result = getRepositoryDao().selectByExample(record, false);
         if(CollectionUtils.isEmpty(result)){
             msg.setResult(EnError.NO_MATCH);
@@ -323,7 +289,7 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
 
     @Override
     public Msg<PageInfo<T>> fuzzySearchByPager(T record, PageBounds pageBounds) {
-        PageHelper.startPage(pageBounds.getPage(), pageBounds.getLimit());
+        PageHelper.startPage(pageBounds.getPage(), pageBounds.getPageSize());
         List<T> result = getRepositoryDao().fuzzySearchByPager(record);
         PageInfo<T> pageInfo = new PageInfo<>(result);
         Msg<PageInfo<T>> msg = new Msg<>();

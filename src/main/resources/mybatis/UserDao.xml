@@ -230,57 +230,6 @@
         <include refid="Example_Where_Clause" />
     </select>
 
-    <update id="updateByExampleSelective">
-        <!--
-            警告 -
-            此语句为代码生成器自动生成,请勿更改
-        -->
-        update user
-        <set>
-            <if test="record.userId != null and record.userId != ''">
-                user_id = #{record.userId,jdbcType=CHAR}
-            </if>
-            <if test="record.userName != null and record.userName != ''">
-                user_name = #{record.userName,jdbcType=VARCHAR}
-            </if>
-            <if test="record.password != null and record.password != ''">
-                password = #{record.password,jdbcType=VARCHAR}
-            </if>
-            <if test = "record.age != null">
-                age = #{record.age,jdbcType=INTEGER}
-            </if>
-            <if test = "record.createAt != null">
-                create_at = #{record.createAt,jdbcType=TIMESTAMP}
-            </if>
-            <if test="record.createBy != null and record.createBy != ''">
-                create_by = #{record.createBy,jdbcType=CHAR}
-            </if>
-            <if test = "record.updateAt != null">
-                update_at = #{record.updateAt,jdbcType=TIMESTAMP}
-            </if>
-            <if test="record.updateBy != null and record.updateBy != ''">
-                update_by = #{record.updateBy,jdbcType=CHAR}
-            </if>
-        </set>
-        <include refid="Prefixed_Example_Where_Clause" />
-    </update>
-    <update id="updateByExample">
-        <!--
-            警告 -
-            此语句为代码生成器自动生成,请勿更改
-        -->
-        update user set
-        user_id = #{record.userId,jdbcType=CHAR},
-        user_name = #{record.userName,jdbcType=VARCHAR},
-        password = #{record.password,jdbcType=VARCHAR},
-        age = #{record.age,jdbcType=INTEGER},
-        create_at = #{record.createAt,jdbcType=TIMESTAMP},
-        create_by = #{record.createBy,jdbcType=CHAR},
-        update_at = #{record.updateAt,jdbcType=TIMESTAMP},
-        update_by = #{record.updateBy,jdbcType=CHAR}
-        <include refid="Prefixed_Example_Where_Clause" />
-    </update>
-
     <update id="updateByPrimaryKeySelective" parameterType="com.example.common.model.User">
         <!--
             警告 -

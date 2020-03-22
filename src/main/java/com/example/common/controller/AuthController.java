@@ -41,7 +41,7 @@ public class AuthController {
         Msg msg = new Msg();
         User queryUser = new User();
         queryUser.setUserName(authRequestUser.getUserName());
-        Msg<List<User>> listMsg = userService.selectByExample(queryUser);
+        Msg<List<User>> listMsg = userService.getUserByName(queryUser);
         if (null == listMsg || null == listMsg.getData() || listMsg.getData().size() ==0) {
             msg.setMsg("账号不存在");
             return msg;
