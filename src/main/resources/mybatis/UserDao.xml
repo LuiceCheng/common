@@ -423,14 +423,6 @@
         </foreach>
     </update>
 
-    <!--<select id="selectByExampleByPager" resultMap="BaseResultMap">-->
-        <!--&lt;!&ndash;-->
-            <!--警告 - -->
-            <!--此语句为代码生成器自动生成,请勿更改-->
-        <!--&ndash;&gt;-->
-        <!--select * from user-->
-        <!--<include refid="Prefixed_Example_Where_Clause" />-->
-    <!--</select>-->
     <select id="fuzzySearch" resultMap="BaseResultMap">
         <!--
             警告 -
