@@ -1,0 +1,65 @@
+spring:
+  profiles:
+    active: devMycat
+  datasource:
+    url: jdbc:mysql://127.0.0.1:8066/HuoKDB?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&allowMultiQueries=true
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+    # 连接池的配置信息
+    # 初始化大小，最小等待连接数量，最大等待连接数量，最大连接数
+    initialSize: 1
+    minIdle: 1
+    maxIdle: 5
+    maxActive: 20
+    # 配置获取连接等待超时的时间
+    maxWait: 60000
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    timeBetweenEvictionRunsMillis: 60000
+    # 配置一个连接在池中最小生存的时间，单位是毫秒
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: true
+    testOnReturn: false
+    driver-class-name: com.mysql.jdbc.Driver
+
+  mvc:
+    view:
+      prefix: /
+      suffix: .html
+
+  redis:
+      database: 0
+      host: localhost
+      port: 6379
+      # 连接超时时间（毫秒）
+      timeout: 60000
+      password:
+      # 连接池最大连接数（使用负值表示没有限制）
+      pool:
+        max-active: 200
+      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1
+      # 连接池中的最大空闲连接
+        max-idle: 10
+      # 连接池中的最小空闲连接
+        min-idle: 0
+
+
+server:
+  port: 8083
+  servlet:
+    context-path: /cxs
+
+mybatis-plus:
+  mapper-locations: classpath*:mybatis/**/*.xml
+  type-aliases-package: com.example.common.model
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    root: info

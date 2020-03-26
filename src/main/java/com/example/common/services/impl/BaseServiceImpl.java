@@ -107,7 +107,7 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
         int insertLength = records.size();
         int i = 0;
         while (insertLength > GlobalConstants.BATCH_INSERT_SIZE) {
-            getRepositoryDao().batchInsertSelective(records.subList(i, GlobalConstants.BATCH_INSERT_SIZE));
+            getRepositoryDao().batchInsertSelective(records.subList(i, i + GlobalConstants.BATCH_INSERT_SIZE));
             i = i + GlobalConstants.BATCH_INSERT_SIZE;
             insertLength = insertLength - GlobalConstants.BATCH_INSERT_SIZE;
         }
